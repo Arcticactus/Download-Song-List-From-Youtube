@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 MP3_CONVERTER = "http://www.youtube-mp3.org/"
 CONVERTER2MP3 = "http://convert2mp3.net/en/index.php"
-CHROME_DRIVER_PATH = "C:\\Users\\QAZ\\Documents\\chromedriver"
+CHROME_DRIVER_PATH = ""
 
 raw_first_line = "document.getElementById('youtube-url').value=\""
 second_line = "document.getElementById(\"submit\").click();"
