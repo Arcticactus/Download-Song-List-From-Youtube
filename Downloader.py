@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 
 MP3_CONVERTER = "http://www.youtube-mp3.org/"
 CONVERTER2MP3 = "http://convert2mp3.net/en/index.php"
-CHROME_DRIVER_PATH = ""
+CHROME_DRIVER_PATH = "C:\\Users\\QAZ\\Documents\\chromedriver"
 
 raw_first_line = "document.getElementById('youtube-url').value=\""
 second_line = "document.getElementById(\"submit\").click();"
@@ -22,8 +22,8 @@ n6 = """document.getElementsByTagName(\"a\")[9].click();"""
 
 def mode2(driver, list_of_songs, stop=""):
     i = 0
-    with open(list_of_songs, "r", encoding="Utf-8-sig") as file, open("fails.txt", "a", encoding="Utf-8-sig") as fails:
-        for song in file:
+    with open(list_of_songs, "r", encoding="Utf-8-sig") as songs, open("fails.txt", "a", encoding="Utf-8-sig") as fails:
+        for song in songs:
             if song.strip('\n') == stop:
                 break
             i += 1
@@ -42,13 +42,10 @@ def mode2(driver, list_of_songs, stop=""):
 
 def mode1(driver, list_of_songs, stop=""):
     i = 0
-    with open(list_of_songs, "r", encoding="Utf-8-sig") as file, open("fails2.txt", "a",
-                                                                      encoding="Utf-8-sig") as fails:
-        for song in file:
+    with open(list_of_songs, "r", encoding="Utf-8-sig") as songs, open("fails.txt", "a", encoding="Utf-8-sig") as fails:
+        for song in songs:
             if song.strip('\n') == stop:
                 break
-            i += 1
-            print(i)
             first_line = n1 + song.strip('\n') + "\";"
             driver.execute_script(first_line)
             driver.execute_script(n2)
@@ -64,8 +61,8 @@ def mode1(driver, list_of_songs, stop=""):
                 if i == 2:
                     time.sleep(5)
                 driver.execute_script(n5)
-                if i == 2:
-                    time.sleep(5)
+            i += 1
+            print(i)
 
 
 # download_directory ="G:\\Users\\USER\\Music"
