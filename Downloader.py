@@ -66,7 +66,6 @@ def mode1(driver, list_of_songs, stop=""):
             print(i)
 
 
-# download_directory ="G:\\Users\\USER\\Music"
 SITE = {1: CONVERTER2MP3, 2: MP3_CONVERTER}
 DOWNLOAD = {1: mode1, 2: mode2}
 
