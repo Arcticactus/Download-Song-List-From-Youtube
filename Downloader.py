@@ -21,53 +21,49 @@ n5 = """document.getElementsByTagName(\"span\")[0].click();"""
 n6 = """document.getElementsByTagName(\"a\")[9].click();"""
 
 
-def mode2(driver, list_of_songs, stop=""):
-    i = 0
-    with open(list_of_songs, "r", encoding="Utf-8-sig") as songs, open("fails.txt", "a", encoding="Utf-8-sig") as fails:
-        for song in songs:
-            if song.strip('\n') == stop:
-                break
-            i += 1
-            print(i)
-            first_line = raw_first_line + song.strip('\n') + "\";"
-            driver.execute_script(first_line)
-            driver.execute_script(second_line)
-            time.sleep(4)
+def mode2(driver, song,fails):
+    first_line = raw_first_line + song.strip('\n') + "\";"
+    driver.execute_script(first_line)
+    driver.execute_script(second_line)
+    time.sleep(4)
 
-            if not driver.find_element_by_id("error_text").is_displayed():
-                driver.execute_script(third_line)
-            else:
-                print(song, end="")
-                fails.write(song)
+    if not driver.find_element_by_id("error_text").is_displayed():
+        driver.execute_script(third_line)
+    else:
+        print(song, end="")
+        fails.write(song)
 
 
-def mode1(driver, list_of_songs, stop=""):
-    i = 0
-    with open(list_of_songs, "r", encoding="Utf-8-sig") as songs, open("fails.txt", "a", encoding="Utf-8-sig") as fails:
-        for song in songs:
-            if song.strip('\n') == stop:
-                break
-            first_line = n1 + song.strip('\n') + "\";"
-            driver.execute_script(first_line)
-            driver.execute_script(n2)
-            time.sleep(7)
-            try:
-                driver.find_element_by_id("errormsg")
-                print(song, end="")
-                fails.write(song)
-            except NoSuchElementException:
-                driver.execute_script(n3)
-                time.sleep(1)
-                driver.execute_script(n4)
-                if i == 2:
-                    time.sleep(5)
-                driver.execute_script(n5)
-            i += 1
-            print(i)
+def mode1(driver, song, fails):
+    first_line = n1 + song.strip('\n') + "\";"
+    driver.execute_script(first_line)
+    driver.execute_script(n2)
+    time.sleep(7)
+    try:
+        driver.find_element_by_id("errormsg")
+        print(song, end="")
+        fails.write(song)
+    except NoSuchElementException:
+        driver.execute_script(n3)
+        time.sleep(1)
+        driver.execute_script(n4)
+        if i == 2:
+            time.sleep(5)
+        driver.execute_script(n5)
 
 
 SITE = {1: CONVERTER2MP3, 2: MP3_CONVERTER}
 DOWNLOAD = {1: mode1, 2: mode2}
+
+
+def downloader(driver,mode, list_of_songs, stop=""):
+    with open(list_of_songs, "r", encoding="Utf-8-sig") as songs, open("fails.txt", "a", encoding="Utf-8-sig") as fails:
+        for song in songs:
+            if song.strip('\n') == stop:
+                break
+            DOWNLOAD[mode](driver, song, fails)
+            
+
 
 
 def main():
@@ -82,7 +78,7 @@ def main():
     driver = webdriver.Chrome(CHROME_DRIVER_PATH, chrome_options=options)
     driver.get(SITE[mode])
     try:
-        DOWNLOAD[mode](driver, songs_list)
+        downloader(driver,mode, songs_list)
     except NoSuchWindowException:
         pass
     finally:
