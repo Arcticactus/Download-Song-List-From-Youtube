@@ -2,6 +2,7 @@ import sys
 import time
 
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException, NoSuchWindowException
 from selenium.webdriver.chrome.options import Options
 
 MP3_CONVERTER = "http://www.youtube-mp3.org/"
@@ -54,7 +55,7 @@ def mode1(driver, list_of_songs, stop=""):
                 driver.find_element_by_id("errormsg")
                 print(song, end="")
                 fails.write(song)
-            except:
+            except NoSuchElementException:
                 driver.execute_script(n3)
                 time.sleep(1)
                 driver.execute_script(n4)
@@ -81,10 +82,14 @@ def main():
     options.add_argument("--disable-infobars")
     driver = webdriver.Chrome(CHROME_DRIVER_PATH, chrome_options=options)
     driver.get(SITE[mode])
-    DOWNLOAD[mode](driver, songs_list)
-    time.sleep(50)
-    driver.close()
-    exit()
+    try:
+        DOWNLOAD[mode](driver, songs_list)
+    except NoSuchWindowException:
+        pass
+    finally:
+        time.sleep(50)
+        driver.close()
+        exit()
 
 
 if __name__ == '__main__':
