@@ -8,7 +8,7 @@ from downloader import downloader
 from downloader import logger
 
 
-FIREFOX_DRIVER_PATH = "C:\\Users\\QAZ\\Videos\\geckodriver.exe"
+FIREFOX_DRIVER_PATH = ""
 CONVERTER2MP3 = "http://convert2mp3.net/en/index.php"
 MP3_CONVERTER = "http://www.youtube-mp3.org/"
 WEBSITE = {"1": CONVERTER2MP3, "2": MP3_CONVERTER}
