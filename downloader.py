@@ -1,5 +1,6 @@
-import time
 import logging
+import time
+
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.remote_connection import LOGGER
@@ -10,16 +11,17 @@ LOGGER.setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename="failed_songs.log", level=logging.DEBUG)
 
+# MP3_CONVERTER
 ENTER_SONG_NAME = """document.getElementById("youtube-url").value="{}";"""
 SUBMIT_SONG = """document.getElementById("submit").click();"""
 PRESS_DOWNLOAD = """for(child in document.getElementById("dl_link").childNodes)if (document.getElementById("dl_link").childNodes.hasOwnProperty(child))if(document.getElementById("dl_link").childNodes[child].style.display==""){document.getElementById("dl_link").childNodes[child].click();break;}"""
 
+# CONVERTER2MP3
 INSERT_SONG_NAME = """document.getElementById("urlinput").value="{}";"""
 CONVERT_SONG = """document.getElementsByTagName("button")[1].click();"""
 SKIP_TAGS = """document.getElementsByTagName("a")[12].click();"""
 DOWNLOAD_SONG = """document.getElementsByTagName("a")[9].click();"""
 CONVERT_NEXT = """document.getElementsByTagName("span")[0].click();"""
-n6 = """document.getElementsByTagName("a")[9].click();"""
 
 
 def download_mp3_converter(driver, song):

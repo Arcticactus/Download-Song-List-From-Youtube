@@ -7,6 +7,7 @@ from selenium.common.exceptions import NoSuchWindowException, WebDriverException
 from downloader import downloader
 from downloader import logger
 
+
 FIREFOX_DRIVER_PATH = "C:\\Users\\QAZ\\Videos\\geckodriver.exe"
 CONVERTER2MP3 = "http://convert2mp3.net/en/index.php"
 MP3_CONVERTER = "http://www.youtube-mp3.org/"
@@ -27,7 +28,7 @@ def get_firefox_profile(download_directory):
 
 def get_user_choice():
     input("press enter when ready to choose the list of songs")
-    songs_list = askopenfilename(initialdir='...')
+    songs_list = askopenfilename(initialdir='.')
     if not songs_list:
         raise ValueError("You did not choose the songs list file.")
     if not songs_list.endswith("txt"):
@@ -51,6 +52,7 @@ def main():
         songs_list, download_directory = get_user_choice()
     except ValueError as e:
         print(e)
+        logger.exception(e)
         sys.exit(1)
     print("Starting to download songs...")
     try:
