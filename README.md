@@ -1,7 +1,7 @@
-# YouTube Mass Downloader
+# YouTube Mass Downloader:
 Downloads a list of YouTube songs (by URL) to a chosen directory (downloads audio only as mp3)
 
-# Usage
+# Usage:
 1. Create a `txt` file which contains the URL's you wish to download.
 2. Run the code.
 3. Choose 1 to download from converter2mp3 and 2 to download from mp3 converter.
