@@ -1,4 +1,4 @@
-# YouTube Mass Downloader:
+# YouTube Mass Downloader
 Downloads a list of YouTube songs (by URL) to a chosen directory (downloads audio only as mp3)
 
 # Usage:
