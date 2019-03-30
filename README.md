@@ -11,4 +11,4 @@ Downloads a list of YouTube songs (by URL) to a chosen directory (downloads audi
 7. Upon completion, review `failed_songs.log to` for the list of songs that failed to download (usually because the URL is no longer valid).
 
 # Notes:
-The code uses selenium and Firefox gecko drive, due to recent changes in Firefox the code can no longer works.
+The code uses Selenium and Firefox Gecko Driver, due to recent changes in Firefox the code can no longer works.
